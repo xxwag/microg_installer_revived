@@ -68,8 +68,7 @@ if [[ "$VD_PATH" = "${VD_PATH#/data/}" ]]; then
 fi
 ui_print "Checking if file path of com.android.vending exists"
 if ! [[ -f "$VD_PATH" ]]; then
-    abort "- ERROR: expected microG Companion / Play Store install path to exist: $VD_PATH"
-fi
+    abort "- ERROR: expected microG Companion / Play Store i
 # Do install tasks
 ui_print "- Installing microG GmsCore"
 if [ ! -d "/my_bigball/priv-app/GmsCore" ]; then
@@ -78,13 +77,6 @@ if [ ! -d "/my_bigball/priv-app/GmsCore" ]; then
 else
   mkdir -p "$MODPATH/system/priv-app/microG"
   cp "$GMS_PATH" "$MODPATH/system/priv-app/microG/microG.apk"
-fi
-if (echo "$DUMP_VD" | grep "android.permission.FAKE_PACKAGE_SIGNATURE") >/dev/null; then
-  ui_print "- Installing microG Companion"
-  pm grant com.android.vending android.permission.FAKE_PACKAGE_SIGNATURE 2>/dev/null
-  ui_print "Installing microG Companion"
-else
-  ui_print "- Installing Play Store"
 fi
 if ! [ -d "/my_bigball/priv-app/GmsCore" ]; then
   mkdir -p "$MODPATH/system/product/priv-app/Phonesky"
